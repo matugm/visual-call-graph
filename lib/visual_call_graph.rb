@@ -1,22 +1,17 @@
 
-require 'graphviz'
+require_relative 'graph_manager'
 
 module VisualCallGraph
   extend self
 
   def trace
-    @stack  = ["start"]
-    @edges  = []
-
-    @g = GraphViz.new(:G, :type => :digraph)
-
-    @g.add_node("start")
+    graph = GraphManager.new
 
     trace =
     TracePoint.new(:call, :return) do |event|
       case event.event
-      when :return then @stack.pop
-      when :call   then add_edges(event)
+      when :return then graph.pop
+      when :call   then graph.add_edges(event)
       end
     end
 
@@ -24,24 +19,8 @@ module VisualCallGraph
     yield
     trace.disable
 
-    @g.output(png: "call_graph.png")
+    graph.output(png: "call_graph.png")
 
-    puts "Call graph created with a total of #{@g.node_count} #{@g.node_count > 1 ? 'nodes' : 'node'}."
-  end
-
-  private
-
-  def add_edges(event)
-    node = "#{event.defined_class}##{event.method_id}".freeze
-
-    @g.add_node(node)
-    @stack << node
-
-    edge = [@stack[-2], @stack[-1]]
-
-    return if @edges.include?(edge)
-
-    @edges << edge
-    @g.add_edge(*@edges.last)
+    puts "Call graph created with a total of #{graph.node_count} #{graph.node_count > 1 ? 'nodes' : 'node'}."
   end
 end
