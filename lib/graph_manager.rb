@@ -13,11 +13,9 @@ class GraphManager
 
   def add_edges(event)
     node = "#{event.defined_class}##{event.method_id}".freeze
+    edge = [@stack.last, node]
 
-    @g.add_node(node)
     @stack << node
-
-    edge = [@stack[-2], @stack[-1]]
 
     return if @edges.include?(edge)
 
