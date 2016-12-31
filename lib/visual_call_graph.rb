@@ -4,8 +4,8 @@ require_relative 'graph_manager'
 module VisualCallGraph
   extend self
 
-  def trace
-    graph = GraphManager.new
+  def trace(options = {})
+    graph = GraphManager.new(options)
 
     trace =
     TracePoint.new(:call, :return) do |event|
@@ -19,7 +19,7 @@ module VisualCallGraph
     yield
     trace.disable
 
-    graph.output(png: "call_graph.png")
+    graph.output(png: "#{Dir.pwd}/call_graph.png")
 
     puts "Call graph created with a total of #{graph.node_count} #{graph.node_count > 1 ? 'nodes' : 'node'}."
   end
