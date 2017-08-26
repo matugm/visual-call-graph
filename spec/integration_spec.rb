@@ -6,6 +6,10 @@ describe VisualCallGraph do
       .to output("Call graph created with a total of 4 nodes.\n")
       .to_stdout
   end
+
+  it "creates an output file" do
+    expect(File.exists?("call_graph.png")).to be_truthy
+  end
 end
 
 module Foo
