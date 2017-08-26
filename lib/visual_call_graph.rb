@@ -5,6 +5,8 @@ module VisualCallGraph
   extend self
 
   def trace(options = {})
+    puts "Block required" and return unless block_given?
+
     graph = GraphManager.new(options)
 
     trace =
