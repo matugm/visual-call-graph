@@ -5,7 +5,10 @@ module VisualCallGraph
   extend self
 
   def trace(options = {})
-    puts "Block required" and return unless block_given?
+    unless block_given?
+      puts "Block required"
+      return
+    end
 
     graph = GraphManager.new(options)
 
@@ -23,6 +26,11 @@ module VisualCallGraph
 
     graph.output(png: "#{Dir.pwd}/call_graph.png")
 
-    puts "Call graph created with a total of #{graph.node_count} #{graph.node_count > 1 ? 'nodes' : 'node'}."
+    puts "Call graph created with a total of #{node_count(graph)}."
+  end
+
+  def node_count(graph)
+    "#{graph.node_count} #{(graph.node_count > 1 ? 'nodes' : 'node')}"
   end
 end
+
