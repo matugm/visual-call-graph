@@ -10,6 +10,8 @@ Gem::Specification.new do |s|
   s.files       = Dir["lib/*.rb"]
   s.license     = 'MIT'
 
-  s.add_runtime_dependency 'ruby-graphviz', '~> 1.2', '>= 1.2.0'
+  s.require_paths = ["lib"]
+
+  s.add_runtime_dependency 'ruby-graphviz', '~> 1.2.0'
 end
 
