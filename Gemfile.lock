@@ -1,0 +1,19 @@
+PATH
+  remote: .
+  specs:
+    visual_call_graph (0.5.0)
+      ruby-graphviz (~> 1.2.0)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    ruby-graphviz (1.2.3)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  visual_call_graph!
+
+BUNDLED WITH
+   1.16.1
