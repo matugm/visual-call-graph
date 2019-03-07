@@ -32,9 +32,9 @@ class GraphManager
     end
   end
 
-  def output()
-    format = options[:format] || :png
-    path   = options[:path] || "#{Dir.pwd}/call_graph.#{format.to_s}"
+  def output
+    format = @options[:format] || :png
+    path   = @options[:path] || "#{Dir.pwd}/call_graph.#{format.to_s}"
     @g.output(format.to_sym => path)
   end
 
