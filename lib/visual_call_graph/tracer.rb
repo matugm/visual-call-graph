@@ -14,7 +14,7 @@ class Tracer
   end
 
   def generate_output_png
-    @graph.output(png: "#{Dir.pwd}/call_graph.png")
+    @graph.output
 
     puts "Call graph created with a total of #{node_count}."
   end
